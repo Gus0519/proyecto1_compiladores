@@ -1,0 +1,31 @@
+cadena
+caracter
+entero
++ - *
+~ +~ -~ *~ /~ $~
+( ) { } [ ] & , :
+^^ ^^
+"Sample string with 38 characters"
+"Hello, Wordl!"
+"Testing"
+= <>
+a12345
+b12
+testV
+Main
+y
+z9999
+123
++456
+-789
+i0
+987654
+-3
+123.456
+0.789
+.456
+9999.
+'a'
+'b'
+'x'
+'1'
