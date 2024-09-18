@@ -8,6 +8,7 @@ entero
 "Sample string with 38 characters"
 "Hello, Wordl!"
 "Testing"
+@*/sdaw@@
 = <>
 a12345
 b12

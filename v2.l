@@ -27,18 +27,36 @@ ConsCaracter       \'[^\']\'
 {OpAsignacion}       { printf("%s es un operador de asignacion\n", yytext); }
 {SimbolosEspeciales} { printf("%s es un simbolo especial\n", yytext); }
 {OpRelacionales}     { printf("%s es un operador relacional\n", yytext); }
-{Identificadores}    { printf("%s es un identificador\n", yytext); }
+{Identificadores} {
+    printf("%s es un identificador\n", yytext);
+    if (buscarSimbolo(yytext) == -1) {
+        agregarSimbolo(yytext, -2);  // Agregar el identificador si no está ya en la tabla
+    } else {
+        printf("%s ya existe en la tabla de símbolos\n", yytext);
+    }
+}
+
 {ConsNum}            { 
     printf("%s es una constante numerica\n", yytext); 
-    agregarLiteralNumerica(atoi(yytext));  // Agregar a la tabla de literales numéricas
+    agregarLiteralNumerica(atof(yytext));  // Agregar a la tabla de literales numéricas
 }
 {ConsReales}         { 
     printf("%s es una constante real\n", yytext); 
-    agregarLiteralReal(atof(yytext));  // Agregar a la tabla de literales reales
+    agregarLiteralNumerica(atof(yytext));  // Agregar a la tabla de literales numericas
 }
 {ConsCaracter}       { printf("%s es una constante caracter\n", yytext); }
 [ \t\n]+             { /* Ignorar espacios, tabulaciones y saltos de línea */ }
-.                    { printf("%s No es ningun elemento reconocible\n", yytext); }
+. {
+    printf("Error: %s no es ningún elemento reconocible\n", yytext);
+    FILE *f = fopen("errores.txt", "a");
+    if (f != NULL) {
+        fprintf(f, "Error: %s no es ningún elemento reconocible\n", yytext);
+        fclose(f);
+    } else {
+        printf("Error al abrir errores.txt\n");
+    }
+}
+
 
 %%
 
@@ -52,9 +70,8 @@ int main (int argc, char *argv[]) {
     
 
     imprimirTablaNumerica();
-    imprimirTablaReal();
     imprimirTablaCadenas();
-
+    imprimirTablaSimbolos();
     return 0;
 }
 
