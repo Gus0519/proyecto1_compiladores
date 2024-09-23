@@ -1,0 +1,10 @@
+cadena,0 
+caracter,1
+else, 2
+entero, 3
+For, 4
+if, 5
+real, 6
+return, 7
+void, 8
+while, 9
